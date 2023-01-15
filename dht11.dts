@@ -1,0 +1,42 @@
+// Definitions for dht11 module
+/*
+Adapted from dht11.dts for Raspberrypi, by Keith Hall
+Adapted by pelzi.
+*/
+/dts-v1/;
+/plugin/;
+
+/ {
+        compatible = "sinovoip,bpi-m2-zero\0allwinner,sun8i-h2-plus";
+
+        fragment@0 {
+                target-path = "/";
+                __overlay__ {
+
+                        dht11: dht11_0 {
+                                compatible = "dht11";
+                                pinctrl-names = "default";
+                                pinctrl-0 = <&dht11_pins>;
+                                gpios = <&pio 6 0>; /* PA6 (PIN 7), active high */
+                                status = "okay";
+                        };
+                };
+        };
+
+        fragment@1 {
+                target = <&gpio>;
+                __overlay__ {
+                        dht11_pins: dht11_pins {
+                                pins = "PA6";
+                                function = "gpio_in";
+                                bias-pull-up;
+                        };
+                };
+        };
+
+        __overrides__ {
+                gpiopin =       <&dht11_pins>,"pins:0",
+                                <&dht11>,"gpios:4";
+        };
+};
+
