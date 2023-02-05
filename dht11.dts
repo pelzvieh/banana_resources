@@ -14,7 +14,7 @@ Adapted by pelzi.
                 __overlay__ {
 
                         temperature_humidity: dht11@6 {
-                                compatible = "dht22-poll", "dht11-poll";
+                                compatible = "dht22", "dht11";
                                 pinctrl-names = "default";
                                 pinctrl-0 = <&dht11_pins>;
                                 gpios = <&pio 0 6 0>; /* PA6 (PIN 7), active high */
@@ -27,6 +27,7 @@ Adapted by pelzi.
         fragment@1 {
                 target = <&pio>;
                 __overlay__ {
+			input-debounce = <5 0>; /* 5ms debounce on IRQ bank 0, default on bank 1 */
                         dht11_pins: dht11_pins {
                                 pins = "PA6";
                                 function = "gpio_in";
