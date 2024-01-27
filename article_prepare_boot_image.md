@@ -92,8 +92,8 @@ Eine Device-Tree-Definition für den BananaPi M2 Zero gibt es glücklicherweise 
 ```bash
 apt source linux-image-5.10.0-20-armmp-lpae
 cd linux-5.10.*/
-make CROSS_COMPILE=arm-linux-gnueabihf- defconfig
-make CROSS_COMPILE=arm-linux-gnueabihf- DTC_FLAGS=-@ dtbs
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make defconfig
+ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- make DTC_FLAGS=-@ dtbs
 cd ..
 ```
 Eine Bootloader-Konfiguration leihen wir uns von TuryRx in github aus. Das U-Boot-Script wird allerdings fest codierte Namen für Kernel und InitRAMFS verwenden, während diese Dateien im Debian-Paket mit Versionsnummern verziert sind. Deshalb kopieren wir die gerade installierten einfach.

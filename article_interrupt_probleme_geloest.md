@@ -22,7 +22,7 @@ CPU-Leistung, Interrupt-Geschehen, Speicher, Kernel-Meldungen: alles unauffälli
 
 ## Des Bananenproblems Kern
 
-Ich weiß gar nicht so genau warum, aber ich hatte immer das Gefühl, dass das Problem mit der Verarbeitung von GPIO-Signalen zu IRQs des SoC zu tun haben muss – und nicht mit etwas, was Betriebssystem und CPUs so treiben. Diesem Gefühl folgend arbeitete ich mich mäßig inspiriert durch ein Datasheet des Allwinner H3 (zu finden in den Untiefen des Internet, warum auch immer dort und nicht beim Hersteller...). Architektur des SoC, Busse, Bridges. Beschreibung der GPIOs, Register der PA-Bank, hmhm.
+Ich weiß gar nicht so genau warum, aber ich hatte immer das Gefühl, dass das Problem mit der Verarbeitung von GPIO-Signalen zu IRQs des SoC zu tun haben muss – und nicht mit etwas, was Betriebssystem und CPUs so treiben. Diesem Gefühl folgend arbeitete ich mich mäßig inspiriert durch ein Datasheet des Allwinner H3 (zu finden in den [Untiefen des Internet](https://www.mikrocontroller-elektronik.de/dht22-am2302-luftfeuchte-und-temperatursensor/), warum auch immer dort und nicht beim Hersteller...). Architektur des SoC, Busse, Bridges. Beschreibung der GPIOs, Register der PA-Bank, hmhm.
 
 Oha! Hinter den Registern der PG-Bank kommt nochmal die PA-Bank dran: Kapitel 4.2.55ff beschäftigen sich mit Registern zur Kontrolle der Interrupts aus der PA-Bank.
 
@@ -36,7 +36,7 @@ Geschwind in Devicetree-Doku und Kernel-Sourcen geblättert, wie dieses Register
 
 Und nun?
 
-Ihr findet das aktualisierte Devicetree Overlay in meinem Repository von Bananen-Ressourcen.
+Ihr findet [das aktualisierte Devicetree Overlay](https://github.com/pelzvieh/banana_resources/blob/main/dht11.dts) in meinem Repository von Bananen-Ressourcen.
 
 Daneben auch einen veränderten DHT11-Devicetreiber, der nur noch auf falling edges lauscht, da die low-Pegel des Sensors keine Information tragen. Der ist kein Muss, aber meinen Messungen nach funktioniert er noch einen Tick zuverlässiger als der Original-Treiber und letzter benötigt einen eher noch niedrigeren debounce-Eintrag: mit input-debounce = <1 0> tut er's dann auch ganz robust.
 
