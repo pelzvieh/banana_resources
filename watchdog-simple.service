@@ -1,0 +1,10 @@
+[Unit]
+Description=Run shell script that opens watchdog and regularly writes to it
+
+[Service]
+Type=exec
+ExecStart=/usr/local/sbin/watchdog-simple.sh
+Restart=on-success
+
+[Install]
+WantedBy=multi-user.target
